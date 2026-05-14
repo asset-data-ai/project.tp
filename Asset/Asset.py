@@ -10,7 +10,7 @@ print("=" * 60)
 print("ЗАДАЧА 1 — Загрузка и проверка данных")
 print("=" * 60)
 
-df = pd.read_csv('bank_advanced_dataset.csv')
+df = pd.read_csv('../bank_advanced_dataset.csv')
 print("\nИнформация о типах данных:")
 print(df.dtypes)
 
@@ -42,7 +42,6 @@ print("ЗАДАЧА 3 — Функция high_activity_clients")
 print("=" * 60)
 
 def high_activity_clients(df, min_transactions, min_visits):
-    """Возвращает DataFrame клиентов с заданным уровнем активности."""
     return df[
         (df['Transactions_Last_Month'] >= min_transactions) &
         (df['Branch_Visits_Last_Year'] >= min_visits)
@@ -137,7 +136,6 @@ print("ЗАДАЧА 8 — Функция pivot_analysis + анализ financial
 print("=" * 60)
 
 def pivot_analysis(df, index_col, value_col):
-    """Возвращает сводную таблицу средних значений value_col по index_col и Account_Type."""
     return df.pivot_table(index=index_col, columns='Account_Type', values=value_col, aggfunc='mean')
 
 pivot_region = pivot_analysis(df, 'Region', 'financial_stability')
