@@ -10,7 +10,7 @@ print("=" * 60)
 print("ЗАДАЧА 1 — Загрузка и проверка данных")
 print("=" * 60)
 
-df = pd.read_csv('../bank_advanced_dataset.csv')
+df = pd.read_csv('../Magzhan/bank_advanced_dataset.csv')
 print("\nИнформация о типах данных:")
 print(df.dtypes)
 
