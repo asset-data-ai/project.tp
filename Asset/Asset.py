@@ -198,3 +198,4 @@ axes[2].set_title('Корреляция финансовых и активнос
 plt.tight_layout()
 plt.savefig('student5_seaborn.png', dpi=120)
 plt.close()
+
