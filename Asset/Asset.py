@@ -26,13 +26,13 @@ print("\n" + "=" * 60)
 print("ЗАДАЧА 2 — Клиенты с Income>=80000, Balance>=50000, Credit_Score>=700")
 print("=" * 60)
 
- vip = df[(df['Income'] >= 80000) &
+vip = df[(df['Income'] >= 80000) &
              (df['Balance'] >= 50000) &
              (df['Credit_Score'] >= 700)]
 print(f"VIP клиенты: {len(vip)}")
 print(f"Средний Loan_Amount: {vip['Loan_Amount'].mean():.2f}")
 print("premium клиенты:")
-print(premium[['Customer_ID', 'Income', 'Balance', 'Credit_Score']].head(10).to_string(index=False))
+print(vip[['Customer_ID', 'Income', 'Balance', 'Credit_Score']].head(10).to_string(index=False))
 
 #Задача 3 ── Функции для анализа
 print("\n" + "=" * 60)
@@ -155,8 +155,8 @@ for cat, color in cat_colors.items():
                c=color, label=cat, alpha=0.4, s=10)
 
 ax.set_title('Income vs Balance по категории клиента')
-ax.set_xlabel('Доход (Income)')
-ax.set_ylabel('Баланс (Balance)')
+ax.set_xlabel('Income')
+ax.set_ylabel('Balance')
 ax.legend(title='Категория')
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
