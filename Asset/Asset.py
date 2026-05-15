@@ -5,7 +5,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# ── Задача 1 ── Загрузка данных и проверка корректности ───────────────────
+#Задача 1 ── Загрузка данных и проверка корректности
 print("=" * 60)
 print("ЗАДАЧА 1 — Загрузка и проверка данных")
 print("=" * 60)
@@ -21,22 +21,20 @@ print(missing[missing > 0] if missing.sum() > 0 else "Пропусков нет.
 num_cols = df.select_dtypes(include=np.number).columns
 df[num_cols] = df[num_cols].fillna(df[num_cols].mean())
 
-# ── Задача 2 ── Фильтрация по нескольким условиям ─────────────────────────
+#Задача 2 ── Фильтрация по нескольким условиям
 print("\n" + "=" * 60)
 print("ЗАДАЧА 2 — Клиенты с Income>=80000, Balance>=50000, Credit_Score>=700")
 print("=" * 60)
 
-premium = df[
-    (df['Income'] >= 80000) &
-    (df['Balance'] >= 50000) &
-    (df['Credit_Score'] >= 700)
-]
-print(f"\nКоличество таких клиентов: {len(premium)}")
-print(f"Средний Loan_Amount: {premium['Loan_Amount'].mean():.2f}")
-print("\nПервые 10 клиентов:")
+ vip = df[(df['Income'] >= 80000) &
+             (df['Balance'] >= 50000) &
+             (df['Credit_Score'] >= 700)]
+print(f"VIP клиенты: {len(vip)}")
+print(f"Средний Loan_Amount: {vip['Loan_Amount'].mean():.2f}")
+print("premium клиенты:")
 print(premium[['Customer_ID', 'Income', 'Balance', 'Credit_Score']].head(10).to_string(index=False))
 
-# ── Задача 3 ── Функции для анализа ──────────────────────────────────────
+#Задача 3 ── Функции для анализа
 print("\n" + "=" * 60)
 print("ЗАДАЧА 3 — Функция high_activity_clients")
 print("=" * 60)
@@ -51,7 +49,7 @@ result = high_activity_clients(df, min_transactions=15, min_visits=5)
 print(f"\nКлиентов с Transactions>=15 и Branch_Visits>=5: {len(result)}")
 print(result[['Customer_ID', 'Transactions_Last_Month', 'Branch_Visits_Last_Year']].head(10).to_string(index=False))
 
-# ── Задача 4 ── Comprehension и условные конструкции ──────────────────────
+#Задача 4 ── Comprehension и условные конструкции
 print("\n" + "=" * 60)
 print("ЗАДАЧА 4 — List comprehension: Approved + Balance > 10000")
 print("=" * 60)
@@ -64,21 +62,18 @@ approved_ids = [
 print(f"\nКоличество клиентов: {len(approved_ids)}")
 print(f"Первые 10: {approved_ids[:10]}")
 
-# ── Задача 5 ── Lambda и новые показатели ─────────────────────────────────
+#Задача 5 ── Lambda и новые показатели
 print("\n" + "=" * 60)
 print("ЗАДАЧА 5 — financial_stability = Balance/(Loan_Amount+1) + Income/100000")
 print("=" * 60)
 
-df['financial_stability'] = df.apply(
-    lambda row: row['Balance'] / (row['Loan_Amount'] + 1) + row['Income'] / 100000,
-    axis=1
-)
+df['financial_stability'] = df.apply(lambda row: row['Balance'] / (row['Loan_Amount'] + 1) + row['Income'] / 100000, axis=1)
 top10_fs = df.nlargest(10, 'financial_stability')[
     ['Customer_ID', 'Balance', 'Loan_Amount', 'Income', 'financial_stability']]
 print("\nТоп-10 клиентов по financial_stability:")
 print(top10_fs.to_string(index=False))
 
-# ── Задача 6 ── Циклы и условия ───────────────────────────────────────────
+#Задача 6 ── Циклы и условия
 print("\n" + "=" * 60)
 print("ЗАДАЧА 6 — Категория клиента (Premium / Standard / Low)")
 print("=" * 60)
@@ -96,7 +91,7 @@ df['client_category'] = categories
 print("\nКоличество клиентов по категориям:")
 print(df['client_category'].value_counts())
 
-# ── Задача 7 ── OOP и классы ──────────────────────────────────────────────
+#Задача 7 ── OOP и классы
 print("\n" + "=" * 60)
 print("ЗАДАЧА 7 — Класс BankClient")
 print("=" * 60)
@@ -130,7 +125,7 @@ print("-" * 30)
 for c in clients:
     print(f"{c.customer_id:<15} {c.stability():>12.4f}")
 
-# ── Задача 8 ── Сводные таблицы и функции ────────────────────────────────
+#Задача 8 ── Сводные таблицы и функции
 print("\n" + "=" * 60)
 print("ЗАДАЧА 8 — Функция pivot_analysis + анализ financial_stability")
 print("=" * 60)
@@ -145,7 +140,7 @@ print(pivot_region.round(4))
 print("\nСредний financial_stability по Account_Type:")
 print(df.groupby('Account_Type')['financial_stability'].mean().round(4))
 
-# ── Задача 9 ── Визуализация Matplotlib с условиями ───────────────────────
+#Задача 9 ── Визуализация Matplotlib с условиями
 print("\n" + "=" * 60)
 print("ЗАДАЧА 9 — Scatter: Income vs Balance, цвет по client_category")
 print("=" * 60)
@@ -168,7 +163,7 @@ plt.tight_layout()
 plt.savefig('student5_matplotlib.png', dpi=120)
 plt.close()
 
-# ── Задача 10 ── Визуализация Seaborn ────────────────────────────────────
+#Задача 10 ── Визуализация Seaborn
 print("\n" + "=" * 60)
 print("ЗАДАЧА 10 — Seaborn: countplot, boxplot, heatmap")
 print("=" * 60)
